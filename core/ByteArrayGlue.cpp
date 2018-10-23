@@ -1750,7 +1750,8 @@ namespace avmplus
     
     void ByteArrayObject::setUintProperty(uint32_t i, Atom value)
     {
-        m_byteArray[i] = uint8_t(AvmCore::integer(value));
+        uint8_t &bRef = m_byteArray[i];
+        bRef = uint8_t(AvmCore::integer(value));
     }
     
     Atom ByteArrayObject::getAtomProperty(Atom name) const

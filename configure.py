@@ -69,6 +69,10 @@ def _setSDKParams(sdk_version, os_ver, xcode_version):
         os_ver,sdk_number = '10.7','10.7'
         if xcode_version is None:
             xcode_version = '4'
+    elif sdk_version == '1013':
+        os_ver,sdk_number = '10.13','10.14'
+        if xcode_version is None:
+            xcode_version = '4'
     else:
         print'Unknown SDK version -> %s. Expected values are 104u, 105, 106 or 107.' % sdk_version
         sys.exit(2)
@@ -77,7 +81,7 @@ def _setSDKParams(sdk_version, os_ver, xcode_version):
     if xcode_version is not None:
        xcode_major_version = xcode_version.split(".")[0]
        if int(xcode_major_version) >= 4:
-          sdk_prefix = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX"
+          sdk_prefix = "/Applications/Xcode10.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX"
     if sdk_prefix is None:
        sdk_prefix = "/Developer/SDKs/MacOSX"
 
@@ -90,7 +94,7 @@ def _setSDKParams(sdk_version, os_ver, xcode_version):
 
 def _setGCCVersionedFlags(FLAGS, MAJOR_VERSION, MINOR_VERSION, current_cpu):
     # warnings have been updated to try to include all those enabled by current Flash/AIR builds -- disable with caution, or risk integration pain
-    if MAJOR_VERSION >= 4:
+    if MAJOR_VERSION >= 10:
         FLAGS += "-Wstrict-null-sentinel "
         if current_cpu == 'mips':
             FLAGS += "-Wstrict-aliasing=0 "
@@ -139,9 +143,9 @@ if buildAot:
     config.subst("ENABLE_AOT", 1)
 
 APP_CPPFLAGS = "-DAVMSHELL_BUILD "
-APP_CXXFLAGS = ""
-APP_CFLAGS = ""
-OPT_CXXFLAGS = "-O3 "
+APP_CXXFLAGS = "-O0 -g "
+APP_CFLAGS = "-O0 -g "
+OPT_CXXFLAGS = "-O0 -g "
 OPT_CPPFLAGS = ""
 DEBUG_CPPFLAGS = "-DDEBUG -D_DEBUG "
 DEBUG_CXXFLAGS = ""
@@ -235,10 +239,12 @@ if config.getCompiler() == 'GCC':
     else:
         rawver = build.process.run_for_output(['gcc', '--version'])
     vre = re.compile(".* ([3-9]\.[0-9]+\.[0-9]+)[ \n]")
-    ver = vre.match(rawver).group(1)
-    ver_arr = ver.split('.')
-    GCC_MAJOR_VERSION = int(ver_arr[0])
-    GCC_MINOR_VERSION = int(ver_arr[1])
+    # ver = vre.match(rawver).group(1)
+    # ver_arr = ver.split('.')
+    # GCC_MAJOR_VERSION = int(ver_arr[0])
+    # GCC_MINOR_VERSION = int(ver_arr[1])
+    GCC_MAJOR_VERSION = 6
+    GCC_MINOR_VERSION = 0
 
 
     if the_os == 'android':
@@ -433,7 +439,7 @@ if the_os == "darwin":
                          '_MAC': None,
                          'AVMPLUS_MAC': None,
                          'TARGET_RT_MAC_MACHO': 1})
-    APP_CXXFLAGS += "-fpascal-strings -faltivec -fasm-blocks "
+    APP_CXXFLAGS += "-fpascal-strings -fasm-blocks "
 
     # If an sdk is selected align OS and gcc/g++ versions to it
     os_ver,sdk_path = _setSDKParams(o.mac_sdk, os_ver, o.mac_xcode)
