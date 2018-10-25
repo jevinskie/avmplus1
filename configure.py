@@ -202,12 +202,14 @@ if 'NSPR_LDOPTS' in os.environ:
 if 'DISABLE_RTMPE' in os.environ:
     DISABLE_RTMPE += os.environ['DISABLE_RTMPE'] + " "    
 if o.getBoolArg('valgrind', False, False):
-    OPT_CXXFLAGS = "-O1 -g "
+    OPT_CXXFLAGS = " -g "
 
 
 valinc = '$(topsrcdir)/other-licenses'
 if 'VALGRIND_HOME' in os.environ:
     valinc = os.environ['VALGRIND_HOME'] + '/include'
+else:
+    valinc = '/usr/local/opt/valgrind/include'
 APP_CPPFLAGS += '-I' + valinc + ' '
 
 # builtinBuildFlags() must be called first, featureSettings() will clear the features!

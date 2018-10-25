@@ -641,7 +641,8 @@ namespace MMgc
         REALLY_INLINE RCObject()
         {
             composite = 1;
-            GC::GetGC(this)->AddToZCT(this REFCOUNT_PROFILING_ARG(true));
+            MMgc::GC *t = GC::GetGC(this);
+            t->AddToZCT(this REFCOUNT_PROFILING_ARG(true));
         }
 
         REALLY_INLINE ~RCObject()

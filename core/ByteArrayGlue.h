@@ -375,6 +375,9 @@ namespace avmplus
         String* readMultiByte(uint32_t length, String* charSet);
         String* readUTF();
         String* readUTFBytes(uint32_t length);
+        double getByteArrayAddr();
+        double getBufferAddr();
+        double getBufferArrayAddr();
 
         uint32_t get_bytesAvailable() { return m_byteArray.Available(); }
         

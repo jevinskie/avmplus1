@@ -2412,6 +2412,21 @@ namespace avmplus
         return readUTFBytes((uint32_t)readUnsignedShort());
     }
 
+    double ByteArrayObject::getByteArrayAddr()
+    {
+        return (double)(uintptr_t)&GetByteArray();
+    }
+
+    double ByteArrayObject::getBufferAddr()
+    {
+        return (double)(uintptr_t)GetByteArray().getUnderlyingBuffer();
+    }
+
+    double ByteArrayObject::getBufferArrayAddr()
+    {
+        return (double)(uintptr_t)GetByteArray().getUnderlyingBuffer()->array;
+    }
+
     String* ByteArrayObject::readUTFBytes(uint32_t length)
     {
         if (m_byteArray.Available() < length)
