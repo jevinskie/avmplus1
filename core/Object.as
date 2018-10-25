@@ -28,6 +28,7 @@ package
         protected static native function _setPropertyIsEnumerable(o, V:String, enumerable:Boolean):void
         private static native function _isPrototypeOf(o, V):Boolean
         private static native function _toString(o):String
+        private static native function _getAddr(o):Number
 
         AS3 function isPrototypeOf(V=void 0):Boolean
         {
@@ -96,6 +97,11 @@ package
             prototype.valueOf = function()
             {
                 return this
+            }
+
+            prototype.getAddr = function():Number
+            {
+                return _getAddr(this)
             }
 
             _dontEnumPrototype(prototype);

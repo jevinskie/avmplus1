@@ -197,4 +197,8 @@ namespace avmplus
             return core->concatStrings(s, core->newConstantStringLatin1("]"));
         }
     }
+
+    double ObjectClass::_getAddr(Atom thisAtom) {
+        return (double)(uintptr_t)thisAtom;
+    }
 }

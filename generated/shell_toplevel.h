@@ -7,6 +7,13 @@
 #ifndef _H_nativegen_header_shell_toplevel
 #define _H_nativegen_header_shell_toplevel
 
+/* clang (and gcc) knows about the compiler builtin _Pragma, Visual Studio 2008 C++ compiler does not */
+#ifdef __clang__
+   #define _PRAGMAFUNCTION(...) _Pragma(__VA_ARGS__)
+#else
+   #define _PRAGMAFUNCTION(...) 
+#endif
+
 namespace avmplus {
     class ArrayObject; // Array
     class ByteArrayObject; // flash.utils::ByteArray

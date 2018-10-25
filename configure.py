@@ -231,7 +231,21 @@ MMGC_DYNAMIC = o.getBoolArg('mmgc-shared', False)
 if MMGC_DYNAMIC:
     MMGC_DEFINES['MMGC_DLL'] = None
     MMGC_CPPFLAGS += "-DMMGC_IMPL "
-    
+
+ASAN = o.getBoolArg('asan', False)
+if ASAN:
+    APP_CXXFLAGS += " -fsanitize=address -fsanitize-recover=address  -fsanitize-address-use-after-scope "
+    APP_CFLAGS += " -fsanitize=address -fsanitize-recover=address  -fsanitize-address-use-after-scope "
+    OS_LDFLAGS += " -fsanitize=address -fsanitize-recover=address "
+    AVMSHELL_LDFLAGS += " -fsanitize=address -fsanitize-recover=address "
+
+MSAN = o.getBoolArg('msan', False)
+if MSAN:
+    APP_CXXFLAGS += " -fsanitize=memory -fsanitize-recover=memory "
+    APP_CFLAGS += " -fsanitize=memory -fsanitize-recover=memory "
+    OS_LDFLAGS += " -fsanitize=memory -fsanitize-recover=memory "
+    AVMSHELL_LDFLAGS += " -fsanitize=memory -fsanitize-recover=memory "
+
 # For -Wreorder, see https://bugzilla.mozilla.org/show_bug.cgi?id=475750
 if config.getCompiler() == 'GCC':
     if 'CXX' in os.environ:

@@ -40,6 +40,7 @@ namespace avmplus
         bool _propertyIsEnumerable(Atom thisAtom, Stringp name);
         void _setPropertyIsEnumerable(Atom thisAtom, Stringp name, bool enumerable);
         Stringp _toString(Atom thisAtom);
+        double _getAddr(Atom thisAtom);
 
     // ------------------------ DATA SECTION BEGIN
     private:
