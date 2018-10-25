@@ -201,4 +201,22 @@ namespace avmplus
     double ObjectClass::_getAddr(Atom thisAtom) {
         return (double)(uintptr_t)thisAtom;
     }
+
+    uint32_t ObjectClass::_getSizeOfInstance(Atom thisAtom) {
+        return toplevel()->toTraits(thisAtom)->getSizeOfInstance();
+        //return traits()->getSizeOfInstance();
+    }
+
+    uint32_t ObjectClass::_getTotalSize(Atom thisAtom) {
+        return toplevel()->toTraits(thisAtom)->getTotalSize();
+        //return traits()->getTotalSize();
+    }
+
+    uint32_t ObjectClass::_getExtraSize(Atom thisAtom) {
+        return toplevel()->toTraits(thisAtom)->getExtraSize();
+    }
+
+    uint32_t ObjectClass::_getSlotAreaSize(Atom thisAtom) {
+        return toplevel()->toTraits(thisAtom)->getSlotAreaSize();
+    }
 }

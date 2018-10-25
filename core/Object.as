@@ -29,6 +29,10 @@ package
         private static native function _isPrototypeOf(o, V):Boolean
         private static native function _toString(o):String
         private static native function _getAddr(o):Number
+        private static native function _getSizeOfInstance(o):uint
+        private static native function _getTotalSize(o):uint
+        private static native function _getExtraSize(o):uint
+        private static native function _getSlotAreaSize(o):uint
 
         AS3 function isPrototypeOf(V=void 0):Boolean
         {
@@ -102,6 +106,26 @@ package
             prototype.getAddr = function():Number
             {
                 return _getAddr(this)
+            }
+
+            prototype.getSizeOfInstance = function():uint
+            {
+                return _getSizeOfInstance(this)
+            }
+
+            prototype.getTotalSize = function():uint
+            {
+                return _getTotalSize(this)
+            }
+
+            prototype.getExtraSize = function():uint
+            {
+                return _getExtraSize(this)
+            }
+
+            prototype.getSlotAreaSize = function():uint
+            {
+                return _getSlotAreaSize(this)
             }
 
             _dontEnumPrototype(prototype);

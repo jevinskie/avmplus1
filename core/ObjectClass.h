@@ -41,6 +41,10 @@ namespace avmplus
         void _setPropertyIsEnumerable(Atom thisAtom, Stringp name, bool enumerable);
         Stringp _toString(Atom thisAtom);
         double _getAddr(Atom thisAtom);
+        uint32_t _getSizeOfInstance(Atom thisAtom);
+        uint32_t _getTotalSize(Atom thisAtom);
+        uint32_t _getExtraSize(Atom thisAtom);
+        uint32_t _getSlotAreaSize(Atom thisAtom);
 
     // ------------------------ DATA SECTION BEGIN
     private:

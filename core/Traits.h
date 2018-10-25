@@ -277,10 +277,10 @@ namespace avmplus
         PrintWriter& printExtended(PrintWriter& pw);
 #endif
 
-    private:
-
         // in bytes. size of the slots not included in the size of instance.  Includes size of slots for bases classes that are not native.
         uint32_t getSlotAreaSize() const;
+
+    private:
 
         // Compute size and number of slots not including any slots in native backed classes, these are
         // included in the instance size already.
