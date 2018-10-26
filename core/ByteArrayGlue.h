@@ -378,6 +378,7 @@ namespace avmplus
         double getByteArrayAddr();
         double getBufferAddr();
         double getBufferArrayAddr();
+        double getBufferArrayPtrAddr();
 
         uint32_t get_bytesAvailable() { return m_byteArray.Available(); }
         

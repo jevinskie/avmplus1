@@ -1751,7 +1751,10 @@ namespace avmplus
     void ByteArrayObject::setUintProperty(uint32_t i, Atom value)
     {
         uint8_t &bRef = m_byteArray[i];
-        bRef = uint8_t(AvmCore::integer(value));
+        uint32_t val = AvmCore::integer(value);
+        uint8_t  val8 = uint8_t(val);
+        AvmLog("BA setting 0x%llx to 0x%08x aka 0x%02hhx\n", (uintptr_t)&bRef, val, val8);
+        bRef = uint8_t(val8);
     }
     
     Atom ByteArrayObject::getAtomProperty(Atom name) const
@@ -2424,7 +2427,15 @@ namespace avmplus
 
     double ByteArrayObject::getBufferArrayAddr()
     {
+        uintptr_t p = (uintptr_t)GetByteArray().getUnderlyingBuffer()->array;
+        double r = (double)p;
+        AvmLog("ByteArrayObject::getBufferArrayAddr this: %p p: 0x%llx r: %g\n", this, p, r);
         return (double)(uintptr_t)GetByteArray().getUnderlyingBuffer()->array;
+    }
+
+    double ByteArrayObject::getBufferArrayPtrAddr()
+    {
+        return (double)(uintptr_t)&(GetByteArray().getUnderlyingBuffer()->array);
     }
 
     String* ByteArrayObject::readUTFBytes(uint32_t length)

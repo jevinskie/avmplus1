@@ -603,6 +603,7 @@ public class ByteArray implements IDataInput2, IDataOutput2
     public native function getByteArrayAddr():Number;
     public native function getBufferAddr():Number;
     public native function getBufferArrayAddr():Number;
+    public native function getBufferArrayPtrAddr():Number;
 
     /**
      * The length of the ByteArray object, in bytes.
