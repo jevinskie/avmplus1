@@ -1753,7 +1753,9 @@ namespace avmplus
         uint8_t &bRef = m_byteArray[i];
         uint32_t val = AvmCore::integer(value);
         uint8_t  val8 = uint8_t(val);
-        AvmLog("BA setting 0x%llx to 0x%08x aka 0x%02hhx\n", (uintptr_t)&bRef, val, val8);
+        if (val8 != 0x20 && val8 != 0x00) {
+            AvmLog("BA setting 0x%llx to 0x%08x aka 0x%02hhx\n", (uintptr_t)&bRef, val, val8);
+        }
         bRef = uint8_t(val8);
     }
     
