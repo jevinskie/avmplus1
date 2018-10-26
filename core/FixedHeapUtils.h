@@ -135,11 +135,11 @@ namespace avmplus
         T* operator ->() const;
         T* operator()() const;
 
+        T* t;
     private:
         void set(T* tNew);
         T* value() const;
         T* const* location() const;
-        T* t;
     };
 
 }

@@ -2425,11 +2425,16 @@ namespace avmplus
         return (double)(uintptr_t)GetByteArray().getUnderlyingBuffer();
     }
 
+    double ByteArrayObject::getBufferPtrAddr()
+    {
+        return (double)(uintptr_t)&(this->m_byteArray.m_buffer.t);
+    }
+
     double ByteArrayObject::getBufferArrayAddr()
     {
         uintptr_t p = (uintptr_t)GetByteArray().getUnderlyingBuffer()->array;
         double r = (double)p;
-        AvmLog("ByteArrayObject::getBufferArrayAddr this: %p p: 0x%llx r: %g\n", this, p, r);
+        //AvmLog("ByteArrayObject::getBufferArrayAddr this: %p p: 0x%llx r: %g\n", this, p, r);
         return (double)(uintptr_t)GetByteArray().getUnderlyingBuffer()->array;
     }
 

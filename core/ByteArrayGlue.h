@@ -377,6 +377,7 @@ namespace avmplus
         String* readUTFBytes(uint32_t length);
         double getByteArrayAddr();
         double getBufferAddr();
+        double getBufferPtrAddr();
         double getBufferArrayAddr();
         double getBufferArrayPtrAddr();
 
